@@ -1,22 +1,16 @@
-require "language/node"
-
 class Gencli < Formula
   desc "Turn natural language into suggested shell commands"
   homepage "https://github.com/dapandaETH/cmdgen"
-  url "https://github.com/dapandaETH/cmdgen.git", branch: "main"
   version "0.1.0"
   license "MIT"
 
   depends_on "node"
 
   def install
-    system "npm", "install"
-    system "npm", "run", "build"
-    
-    bin.install_symlink "dist/src/index.js" => "gencli"
+    system "npm", "install", "-g", "https://github.com/dapandaETH/cmdgen/archive/refs/tags/v0.1.0.tar.gz"
   end
 
   test do
-    system "#{bin}/gencli", "--version"
+    system "gencli", "--help"
   end
 end
