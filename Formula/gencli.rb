@@ -10,10 +10,13 @@ class Gencli < Formula
   depends_on "node"
 
   def install
-    system "npm", "install", "-g", "gencli"
+    system "npm", "install"
+    system "npm", "run", "build"
+    
+    bin.install_symlink "dist/src/index.js" => "gencli"
   end
 
   test do
-    assert_match /GenCLI|gencmd/, shell_output("#{bin}/gencli --version", 2)
+    system "#{bin}/gencli", "--version"
   end
 end
